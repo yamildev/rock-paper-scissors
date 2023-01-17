@@ -18,7 +18,7 @@ function getComputerChoise(){
             break;    
         }
 
-    /* desactivamos para prueba de switch
+    /*  desactivamos para prueba de switch
     if       (randomNumber == 1) { return 'rock'; 
     }else if (randomNumber == 2) { return 'paper';
     }else if (randomNumber == 3) { return 'scissors'; 

@@ -57,7 +57,23 @@ function game() {
     let userVictories = 0;
     let computerVictories = 0;
     let roundResult = undefined;
+    
+    //2nd game logic option:
+    while (userVictories < 5 && computerVictories < 5){
+        roundResult = getPlayRound();
+        if (roundResult == 1){
+            userVictories++;
+            console.log('MATCH RESULT: user point!')
+        }else if(roundResult == 2){
+            computerVictories++;
+            console.log('MATCH RESULT: computer point!')
+        }else if(roundResult == 3){
+            console.log('MATCH RESULT empate!');
+        }
+        console.log(`MATCH STATUS\nuser points: ${userVictories}\ncomputer points: ${computerVictories}`)
+    }
 
+/*
     for (let i = 0; i < 5; i++) {
         roundResult = getPlayRound();
         if (roundResult == 1){
@@ -73,6 +89,8 @@ function game() {
         // your code here!
 
      }
+*/
+     //Who won
     if (userVictories > computerVictories) {
             console.log(`user won the game`)
     }else if(userVictories < computerVictories){
@@ -80,7 +98,7 @@ function game() {
     }else console.log(`empate`);
         
     }
-
+//game execution
 game();
         
     

@@ -9,10 +9,10 @@
 // computer Choise Function: 
 
 function computerChoise(){
-    let randomNumber = Math.floor((Math.random() * 3) + 1);
+    let randomNumber = Math.floor((Math.random() * 3) + 1); //Give a number between (and including) 1 and 3
     
     switch (randomNumber) {
-
+    //by default, return lower-case returns for avoid error when functions are working.
         case 1: return 'rock';
             break;
         case 2: return 'paper';
@@ -26,12 +26,17 @@ function computerChoise(){
 function playerChoise() { 
 
     let usrInp = prompt(`User: Introduce 'Rock', 'Paper' or 'Scissors'`);
-    let usrInp_toLowerCase = usrInp.toLowerCase();
+    let usrInp_toLowerCase = usrInp.toLowerCase(); //allow non-sensitives inputs to work with functions
     return usrInp_toLowerCase;
     
 }
-//play a round Function
-function playRound (getPlayerSelection, getComputerSelection) {
+/*
+Game logic is stablished by Rock, Paper, Scissors traditional rules:
+    -return 1: user victory in match played
+    -return 2: computer victory
+    -return 3: 'empate' both won, nothing happens. 
+*/
+function playRound (getPlayerSelection, getComputerSelection) { 
     if (getPlayerSelection == getComputerSelection) {
         return 3;
     }else if (getPlayerSelection == 'rock' && getComputerSelection == 'scissors') {
@@ -47,18 +52,47 @@ function playRound (getPlayerSelection, getComputerSelection) {
     }else if (getPlayerSelection == 'paper' && getComputerSelection == 'scissors') {
         return 2; }
 }
+//Introduced getPlayRound function to allow simplicity. 
 function getPlayRound() {
     return playRound(playerChoise(), computerChoise());
 }
-//game function
+//game function, add feat: counters, logic behind victories, and console.log results.
 function game() {
+    //counters
+    let userVictories = 0;
+    let computerVictories = 0;
+    let roundResult = undefined;
+
+    for (let i = 0; i < 5; i++) { //plays 5 matches
+        
+        roundResult = getPlayRound();   //we get the playRound return, now saved in roundResult
+        if (roundResult == 1){ //
+            userVictories++;
+            console.log('MATCH RESULT: user point!')
+        }else if(roundResult == 2){
+            computerVictories++;
+            console.log('MATCH RESULT: computer point!')
+        }else if(roundResult == 3){
+            console.log('MATCH RESULT empate!');
+        }
+        console.log(`MATCH STATUS\nuser points: ${userVictories}\ncomputer points: ${computerVictories}`)
+
+     }
+/*    
+ 
+    Alternative game function: 
+    In this version, the game non stop until player or computer won 5 games,
+    for example: if the result is 'empate' every time by match, then
+    would be infinite matches until a win result, by other hand, the default
+    game option allow the game to stop at 5 matches played.
+    
+  
+    function game() {
 //we get the playRound return, now saved in roundResult. 
     //counters
     let userVictories = 0;
     let computerVictories = 0;
     let roundResult = undefined;
-    
-    //2nd game logic option:
     while (userVictories < 5 && computerVictories < 5){
         roundResult = getPlayRound();
         if (roundResult == 1){
@@ -73,24 +107,9 @@ function game() {
         console.log(`MATCH STATUS\nuser points: ${userVictories}\ncomputer points: ${computerVictories}`)
     }
 
-/*
-    for (let i = 0; i < 5; i++) {
-        roundResult = getPlayRound();
-        if (roundResult == 1){
-            userVictories++;
-            console.log('MATCH RESULT: user point!')
-        }else if(roundResult == 2){
-            computerVictories++;
-            console.log('MATCH RESULT: computer point!')
-        }else if(roundResult == 3){
-            console.log('MATCH RESULT empate!');
-        }
-        console.log(`MATCH STATUS\nuser points: ${userVictories}\ncomputer points: ${computerVictories}`)
-        // your code here!
-
-     }
 */
-     //Who won
+
+    //Dictates who won the game, when internal loop in game function is finished.
     if (userVictories > computerVictories) {
             console.log(`user won the game`)
     }else if(userVictories < computerVictories){
@@ -98,37 +117,6 @@ function game() {
     }else console.log(`empate`);
         
     }
-//game execution
+
+//game execution by default
 game();
-        
-    
-
-//console.log(playRound(playerChoise(), computerChoise()));
-/*'
-function game(getPlayRound){
-
-    let userVictories = 0;
-    let computerVictories= 0;
-//play 5 rounds
-    while (userVictories != 5 || computerVictories != 5) {
-        if  (getPlayRound == 1){
-            userVictories++;
-            console.log('uservictories: ',userVictories)
-        }else if (getPlayRound == 2){
-            computerVictories++;
-            console.log('computervictories: ',userVictories)
-
-        }else if (getPlayRound == 3)
-            return 'Empate'; 
-//declare winner
-        if (userVictories == 5){
-            alert('You Win')
-        }else if (computerVictories == 5){
-            alert('You lose, try again')
-
-        }
-    }
-}
-game(playRound());
-
-*/

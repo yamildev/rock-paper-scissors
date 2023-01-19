@@ -1,0 +1,23 @@
+[33mcommit ba6e95eccabb035d5e37087aedeeb490804769db[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: yamil dev <83871101+yamildev@users.noreply.github.com>
+Date:   Tue Jan 17 18:15:17 2023 -0300
+
+    feat: game logic by playRound function
+
+[33mcommit 013b82ab6394f9360921cf6fa2a0688f507605c2[m
+Author: yamil dev <83871101+yamildev@users.noreply.github.com>
+Date:   Wed Jan 11 19:22:29 2023 -0300
+
+    Add index.hmtl
+
+[33mcommit 79b7773e24535ea2c55788bff80ca17e798a30e7[m
+Author: yamil dev <83871101+yamildev@users.noreply.github.com>
+Date:   Wed Jan 11 19:22:04 2023 -0300
+
+    Add game.js
+
+[33mcommit 8795fcdc1781e0a03b6dc4ba00174947dd05da14[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: yamildev <83871101+yamildev@users.noreply.github.com>
+Date:   Tue Jan 10 15:58:43 2023 -0300
+
+    Initial commit

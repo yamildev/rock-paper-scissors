@@ -1,15 +1,18 @@
+
 /*
     Your game is going to play against the computer, so begin with a function
     called getComputerChoise that will randomly return either ‘Rock’, ‘Paper’ or ‘Scissors’.
     use the console to make sure this is returning the expected output before moving to the next step!
 */
 
+
 // computer Choise Function: 
-function getComputerChoise(){
+
+function computerChoise(){
     let randomNumber = Math.floor((Math.random() * 3) + 1);
+    
     switch (randomNumber) {
-        //main.js is linked to index.html
-        //getComputerChoise change: perform switch to return. 
+
         case 1: return 'rock';
             break;
         case 2: return 'paper';
@@ -18,51 +21,96 @@ function getComputerChoise(){
             break;    
         }
 
-    /*  desactivamos para prueba de switch
-    if       (randomNumber == 1) { return 'rock'; 
-    }else if (randomNumber == 2) { return 'paper';
-    }else if (randomNumber == 3) { return 'scissors'; 
-    */
 }
-
 // player Choise Function:        
-function getPlayerChoise() { 
-    let usrInp = prompt(`Introduce 'Rock', 'Paper' or 'Scissors'`);
+function playerChoise() { 
+
+    let usrInp = prompt(`User: Introduce 'Rock', 'Paper' or 'Scissors'`);
     let usrInp_toLowerCase = usrInp.toLowerCase();
     return usrInp_toLowerCase;
+    
 }
-
-// playRound Function:
-function playRound (getPlayerChoise, getComputerChoise) {
-//aca hay que agregar la salida a las combinaciones, utilizare un switch
-/*
-let a = 2 + 2;
-
-switch (a) {
-  case 3:
-    alert( 'Too small' );
-    break;
-  case 4:
-    alert( 'Exactly!' );
-    break;
-  case 5:
-    alert( 'Too big' );
-    break;
-  default:
-    alert( "I don't know such values" );
+//play a round Function
+function playRound (getPlayerSelection, getComputerSelection) {
+    if (getPlayerSelection == getComputerSelection) {
+        return 3;
+    }else if (getPlayerSelection == 'rock' && getComputerSelection == 'scissors') {
+        return 1;
+    }else if (getPlayerSelection == 'rock' && getComputerSelection == 'paper') {
+        return 2;
+    }else if (getPlayerSelection == 'scissors' && getComputerSelection == 'paper') {
+        return 1;
+    }else if (getPlayerSelection == 'scissors' && getComputerSelection == 'rock') {
+        return 2;
+    }else if (getPlayerSelection == 'paper' && getComputerSelection == 'rock') {
+        return 1;
+    }else if (getPlayerSelection == 'paper' && getComputerSelection == 'scissors') {
+        return 2; }
 }
-*/
-    if (getPlayerChoise == getComputerChoise) {
-        prompt('Empate');
-    }else{
+function getPlayRound() {
+    return playRound(playerChoise(), computerChoise());
+}
+//game function
+function game() {
+//we get the playRound return, now saved in roundResult. 
+    //counters
+    let userVictories = 0;
+    let computerVictories = 0;
+    let roundResult = undefined;
+
+    for (let i = 0; i < 5; i++) {
+        roundResult = getPlayRound();
+        if (roundResult == 1){
+            userVictories++;
+            console.log('MATCH RESULT: user point!')
+        }else if(roundResult == 2){
+            computerVictories++;
+            console.log('MATCH RESULT: computer point!')
+        }else if(roundResult == 3){
+            console.log('MATCH RESULT empate!');
+        }
+        console.log(`MATCH STATUS\nuser points: ${userVictories}\ncomputer points: ${computerVictories}`)
+        // your code here!
+
+     }
+    if (userVictories > computerVictories) {
+            console.log(`user won the game`)
+    }else if(userVictories < computerVictories){
+            console.log(`computer won the game`)
+    }else console.log(`empate`);
+        
     }
-    // prueba
-    console.log("player Choise: ", getPlayerChoise());
-    console.log("Computer Choise: ", getComputerChoise());
 
+game();
+        
+    
 
+//console.log(playRound(playerChoise(), computerChoise()));
+/*'
+function game(getPlayRound){
+
+    let userVictories = 0;
+    let computerVictories= 0;
+//play 5 rounds
+    while (userVictories != 5 || computerVictories != 5) {
+        if  (getPlayRound == 1){
+            userVictories++;
+            console.log('uservictories: ',userVictories)
+        }else if (getPlayRound == 2){
+            computerVictories++;
+            console.log('computervictories: ',userVictories)
+
+        }else if (getPlayRound == 3)
+            return 'Empate'; 
+//declare winner
+        if (userVictories == 5){
+            alert('You Win')
+        }else if (computerVictories == 5){
+            alert('You lose, try again')
+
+        }
+    }
 }
-playRound(getPlayerChoise, getComputerChoise);
+game(playRound());
 
-
-
+*/

@@ -22,19 +22,19 @@ function computerChoise(){
         }
 
 }
-// player Choise Function:        
+//  player Choise Function:        
 function playerChoise() { 
 
     let usrInp = prompt(`User: Introduce 'Rock', 'Paper' or 'Scissors'`);
-    let usrInp_toLowerCase = usrInp.toLowerCase(); //allow non-sensitives inputs to work with functions
+    let usrInp_toLowerCase = usrInp.toLowerCase();  //allows non-sensitives inputs to work with functions, avoiding errors. 
     return usrInp_toLowerCase;
-    
+
 }
 /*
 Game logic is stablished by Rock, Paper, Scissors traditional rules:
-    -return 1: user victory in match played
-    -return 2: computer victory
-    -return 3: 'empate' both won, nothing happens. 
+    -return 1: user's victory in match played
+    -return 2: computer's victory
+    -return 3: 'empate' both won 
 */
 function playRound (getPlayerSelection, getComputerSelection) { 
     if (getPlayerSelection == getComputerSelection) {
@@ -52,20 +52,20 @@ function playRound (getPlayerSelection, getComputerSelection) {
     }else if (getPlayerSelection == 'paper' && getComputerSelection == 'scissors') {
         return 2; }
 }
-//Introduced getPlayRound function to allow simplicity. 
+//  Introduced getPlayRound function to allow simplicity. 
 function getPlayRound() {
     return playRound(playerChoise(), computerChoise());
 }
-//game function, add feat: counters, logic behind victories, and console.log results.
+//  Game function, add feat: counters, logic behind victories, and console.log results.
 function game() {
     //counters
     let userVictories = 0;
     let computerVictories = 0;
     let roundResult = undefined;
 
-    for (let i = 0; i < 5; i++) { //plays 5 matches
+    for (let i = 0; i < 5; i++) { //Plays 5 matches
         
-        roundResult = getPlayRound();   //we get the playRound return, now saved in roundResult
+        roundResult = getPlayRound();   //We get the playRound return, now saved in roundResult
         if (roundResult == 1){ //
             userVictories++;
             console.log('MATCH RESULT: user point!')
@@ -78,12 +78,13 @@ function game() {
         console.log(`MATCH STATUS\nuser points: ${userVictories}\ncomputer points: ${computerVictories}`)
 
      }
-/*    
- 
-    Alternative game function: 
+/*     
+    
+            Alternative game behavior version in game function:
+   
     In this version, the game non stop until player or computer won 5 games,
-    for example: if the result is 'empate' every time by match, then
-    would be infinite matches until a win result, by other hand, the default
+    I,e.: if roundResult == 3, 'empate' every time by match, then
+    would be infinite matches until a win result in one game, by other hand, the default
     game option allow the game to stop at 5 matches played.
     
   
@@ -109,7 +110,7 @@ function game() {
 
 */
 
-    //Dictates who won the game, when internal loop in game function is finished.
+    //  Dictates who won the game, when internal loop in game function is finished.
     if (userVictories > computerVictories) {
             console.log(`user won the game`)
     }else if(userVictories < computerVictories){
@@ -118,5 +119,5 @@ function game() {
         
     }
 
-//game execution by default
+//  Game execution by default.
 game();

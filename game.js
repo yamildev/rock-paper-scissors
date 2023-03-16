@@ -1,103 +1,93 @@
+//  A: SET UP VARIABLES
 
+let playerScore = 0;
+let computerScore = 0;
+let userPlay = undefined
 
+const buttons = document.querySelectorAll('button'); // Select the botton who run playRound function
+
+//  B: DOM BUTTON FUNCTIONALITIES 
+
+//  B1: Register the click input to execute the function 'playRound',
+//      Register the click input from the user,clear
+//      Reference our const 'buttons'.
+
+    buttons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            userPlay = e.target.id;
+        })        
+        button.addEventListener('click', () =>{
+            playRound();
+        })
+    })
+
+//  B2: Disable the buttons if function is called upon (in playRound )
+
+function disableButtons () {
+    buttons.forEach(button => {
+        button.disabled = true;
+    })
+}
+
+//  C: SEGREGATED JS FUNCTIONS. ONE FUNCTION ONE ACTION
+
+//  C1. Generate random CPU input
+
+function computerPlay() {
+    const choices = ['rock', 'paper', 'scissors'];
+    let i = Math.floor(Math.random() * choices.length);
+    return choices[i];    
+};
+   
+//  C3. Executes game logic, conditions for user input to win vs CPU random input
 /*
-    Your game is going to play against the computer, so begin with a function
-    called getComputerChoise that will randomly return either ‘Rock’, ‘Paper’ or ‘Scissors’.
-    use the console to make sure this is returning the expected output before moving to the next step!
+    1. playRound function pulls in (references) two other functions: computerPlay, disableButtons
+    2. playRound function is then pulled into the DOM: button.addEventListener('click', function (){
+        playRound(e.target.id);
+    })
 */
 
-
-// computer Choise Function: 
-
-function computerChoice(){
-    let randomNumber = Math.floor((Math.random() * 3) + 1); //Give a number between (and including) 1 and 3
+function playRound () {
     
-    switch (randomNumber) {
-    //by default, return lower-case 'returns' to avoid error when functions are working.
-        case 1: return 'rock';
-            break;
-        case 2: return 'paper';
-            break;            
-        case 3: return 'scissors';
-            
-            break;    
+    let getPlayerSelection = userPlay;
+    let getComputerSelection  = computerPlay();
+    let result = "" //  show result
+
+    if (getPlayerSelection == getComputerSelection) {
+
+        result =  `<br><br><b>Is a tie: </b><br>both chose ${getPlayerSelection}`; //TIE
+
+    }else if  ((getPlayerSelection == 'rock' && getComputerSelection == 'scissors') || 
+              (getPlayerSelection == 'scissors' && getComputerSelection == 'paper') ||
+              (getPlayerSelection == 'paper' && getComputerSelection == 'rock')) {
+    
+
+        playerScore += 1;
+        //result = `<br><b>You win: </b><br> ${getPlayerSelection} beats ${getComputerSelection}`;
+        result = `<br><br><b>You win: </b><br>${getPlayerSelection} beats ${getComputerSelection}`;
+
+        if (playerScore == 5) {
+
+            result += '<br><br>You Won the game! Reload the page to play again.'
+            disableButtons (); // disable the buttons once the game is finished because user won.
         }
 
-}
-/*
-function playerChoice() {
-    const buttons = document.querySelectorAll ('button');
-    buttons.forEach((button) => {
-
-        button.addEventListener('click', (e) =>{
-            
-            const getPlayerChoice = e.target.id //we get the playerChoise as the id value [rock, paper or scissors] from each button, whatever targeted
-            console.log(`getPlayerChoice: ${getPlayerChoice}`)
-            return getPlayerChoice; 
-        });
-});
-}  
-*/
-//prueba
-//playerChoice();
-
-/*
-//  player Choise Function:        
-function playerChoice(choice) { 
-
-
-    //let usrInp = prompt(`User: Introduce 'Rock', 'Paper' or 'Scissors'`);    
-    //let choice = choice;    
-    
-    //let usrInp_lowerCase = usrInp.toLowerCase();  //allows non-sensitives inputs to work with functions, avoiding errors. 
-    let choice_lowerCase = choice.toLowerCase();  //allows non-sensitives inputs to work with functions, avoiding errors. 
-        return choice_lowerCase;
-        //return usrInp_lowerCase;
-
-}
-*/
-/*
-Game logic is stablished by Rock, Paper, Scissors traditional rules:
-    -return 1: user's victory in match played
-    -return 2: computer's victory
-    -return 3: 'empate' both won 
-*/
-
-
-
-function playRound (getPlayerSelection) { 
-
-
-    const getComputerSelection = computerChoice()
-    //prueba, se intentara obtener la seleccion del jugador a traves de un listener que llamara a playRound
-    //const getPlayerSelection = playerChoice()
-    
-    if (getPlayerSelection == getComputerSelection) {
-        return 3; //TIE
-    
-    }else if (getPlayerSelection == 'rock' && getComputerSelection == 'scissors' || 
-              getPlayerSelection == 'scissors' && getComputerSelection == 'paper' ||
-              getPlayerSelection == 'paper' && getComputerSelection == 'rock') {
-        return 1; //WIN 
-    //LOSE
-    }else if (getPlayerSelection == 'rock' && getComputerSelection == 'paper' ||
-              getPlayerSelection == 'scissors' && getComputerSelection == 'rock' ||
-              getPlayerSelection == 'paper' && getComputerSelection == 'scissors') 
-        return 2; //LOSE
+    }else {
+        
+        computerScore += 1;
+        result = `<br><br><b>You Lose: </b><br>${getComputerSelection} beats ${getPlayerSelection}`; 
+        
+        if (computerScore == 5) {
+            result += `<br><br>You lose. Reload the page to try again`
+            disableButtons();
+        }
     }
 
-const buttons = document.querySelectorAll('button'); //Player choice buttons
+// C3. Update and show results by element.innerHTML method
 
-buttons.forEach((button) => {
+    document.getElementById('result').innerHTML = result
+    document.getElementById('result-playerScore').innerHTML = `<b>Player:</b><br> ${playerScore}`;
+    document.getElementById('result-computerScore').innerHTML = `<b>Computer:</b><br> ${computerScore}`;
 
-    button.addEventListener('click', (event) => {
-
-        const result = playRound(event.target.id);
-        console.log(result);
-        
-});
-});
-//display Results
-
-
+}
 
